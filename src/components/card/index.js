@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 
-const Card = ({ name, type, key}) => {
+const Card = ({ name, type }) => {
   const [, drag] = useDrag({
     item: { name, type },
     // end: (item, monitor) => {
@@ -15,7 +15,11 @@ const Card = ({ name, type, key}) => {
     }),
   });
 
-  return <h4 key={key} style={{cursor:"pointer"}} ref={drag}>{name}</h4>;
+  return (
+    <h4 style={{ cursor: "pointer" }} ref={drag}>
+      {name}
+    </h4>
+  );
 };
 
 export default Card;
