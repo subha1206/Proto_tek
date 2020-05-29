@@ -1,0 +1,28 @@
+.main-container {
+  padding: 20px;
+  margin: 0 50px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  align-self: center;
+
+  border: solid 2px grey;
+
+  .test {
+    width: 20%;
+    height: 500px;
+    border: 2px solid grey;
+    margin: 0 20px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .text2 {
+    width: 700px;
+    height: 500px;
+  }
+}
