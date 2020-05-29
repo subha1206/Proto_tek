@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -12,31 +12,49 @@ import { useDrop } from "react-dnd";
 
 const DropZone = ({ accept, onDrop, itemOnCanvas }) => {
   let lastItem = itemOnCanvas.slice(-1).pop();
-  console.log(itemOnCanvas);
-  
+
+  const [itemsArr, setitemsArr] = useState([]);
+
   let itemToMount = [];
-  
+  let testNum = [];
 
   while (lastItem !== undefined) {
-    switch (lastItem.name) {
-      case "Rect":
-        itemToMount.push(<Rectangle key={uuidv4()} />);
+    // switch (lastItem.name) {
+    //   case "Rect":
+    //     itemToMount.push(<Rectangle key={uuidv4()} />);
+    //     testNum.concat(uuidv4())
+    //     console.log(testNum);
+    //     break;
+    //   case "Text":
+    //     itemToMount.push(<CustText key={uuidv4()} />);
+    //     testNum.concat(uuidv4())
+    //     console.log(testNum);
+    //     break;
+    //   case "Circle":
+    //     itemToMount.push(<Circ key={uuidv4()} />);
+    //     testNum.concat(uuidv4())
+    //     console.log(testNum);
 
-        break;
-      case "Text":
-        itemToMount.push(<CustText key={uuidv4()} />);
-        break;
-      case "Circle":
-        itemToMount.push(<Circ key={uuidv4()} />);
-        break;
-      default:
-        break;
+    //     break;
+    //   default:
+    //     break;
+    // }
+    if (lastItem.name === "Rect") {
+      itemToMount.push(<Rectangle key={uuidv4()} />);
+      testNum.concat(uuidv4());
+      console.log(testNum);
+    } else if (lastItem.name === "Circle") {
+      itemToMount.push(<Circ key={uuidv4()} />);
+      testNum.concat(uuidv4());
+      console.log(testNum);
+    } else if (lastItem.name === "Text") {
+      itemToMount.push(<CustText key={uuidv4()} />);
+      testNum.concat(uuidv4());
+      console.log(testNum);
+    } else {
     }
     break;
   }
-
-  console.log("just for fun", itemToMount);
-
   const [, drop] = useDrop({
     accept,
     drop: onDrop,
@@ -49,7 +67,7 @@ const DropZone = ({ accept, onDrop, itemOnCanvas }) => {
   return (
     <div ref={drop} style={{ height: "500px", border: "1px solid red" }}>
       <Stage width={700} height={500}>
-        <Layer>{itemToMount.map(item => item)}</Layer>
+        <Layer>{itemToMount}</Layer>
       </Stage>
     </div>
   );

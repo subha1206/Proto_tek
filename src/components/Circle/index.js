@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Circle } from "react-konva";
 
 const Circ = () => {
-  const [isdraging, setisdraging] = useState(false);
+  const [, setisdraging] = useState(false);
   const [x, setX] = useState(200);
   const [y, setY] = useState(100);
   return (

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import DropZone from "../../components/dropable";
 import Card from "../../components/card";
 
+import { v4 as uuidv4 } from "uuid";
+
 import { ItemTypes } from "../../constants/types";
 
 import "./style.scss";
@@ -13,14 +15,16 @@ const Home = () => {
   ]);
 
   const [itemOnCanvas, setItemOnCanvas] = useState([]);
+
   const [shapes] = useState([
-    { name: "Rect", type: ItemTypes.CARD },
-    { name: "Circle", type: ItemTypes.CARD },
-    { name: "Text", type: ItemTypes.CARD },
+    { name: "Rect", type: ItemTypes.CARD, uinqId: uuidv4(), key: "rect" },
+    { name: "Circle", type: ItemTypes.CARD, uinqId: uuidv4(), key: "circ" },
+    { name: "Text", type: ItemTypes.CARD, uinqId: uuidv4(), key: "text" },
   ]);
 
   const handleDrop = (item) => {
     setItemOnCanvas([...itemOnCanvas, item]);
+    console.log("items", item);
   };
 
   return (
@@ -31,8 +35,8 @@ const Home = () => {
       <div className="main-container">
         <div className="test">
           <h3>Drag the shapes from Bellow</h3>
-          {shapes.map(({ name, type }, index) => (
-            <Card name={name} type={type} key={index} />
+          {shapes.map(({ name, type, uinqId, key }) => (
+            <Card name={name} type={type} uinqId={uinqId} key={key} />
           ))}
         </div>
 

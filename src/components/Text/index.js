@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text } from "react-konva";
 
 const CustText = () => {
-  const [isdraging, setisdraging] = useState(false);
+  const [, setisdraging] = useState(false);
   const [x, setX] = useState(200);
   const [y, setY] = useState(50);
   return (
