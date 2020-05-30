@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Circle } from "react-konva";
+import { Circle, Group, Text } from "react-konva";
 
-const Circ = () => {
-  const [, setisdraging] = useState(false);
-  const [x, setX] = useState(200);
-  const [y, setY] = useState(100);
+const Circ = ({ changePosition, attrs, key, id }) => {
+    
+  const { position, shape, style } = attrs;
+
   return (
-    <Circle
+    <Group
+      x={position.x}
+      y={position.y}
       draggable
-      x={x}
-      y={y}
-      radius={50}
-      stroke="black"
-      onDragStart={() => setisdraging(true)}
       onDragEnd={(e) => {
-        setisdraging(false);
-        setX(e.target.x());
-        setY(e.target.y());
+        changePosition(id, e.target.x(), e.target.y());
       }}
-    />
+    >
+      <Text text={`x=${position.x} y=${position.y}`} y={-60} />
+      <Circle key={key} radius={shape.r} fill={style.fill} />
+    </Group>
   );
 };
 

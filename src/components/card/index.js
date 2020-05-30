@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 
-const Card = ({ name, type, uinqId, key } ) => {
+const Card = ({ name, type } ) => {
 
   
   const [, drag] = useDrag({

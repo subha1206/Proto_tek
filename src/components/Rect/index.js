@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Rect } from "react-konva";
+import { Rect,Group, Text } from "react-konva";
 
-const Rectangle = ({ key }) => {
-  const [, setisdraging] = useState(false);
-  const [x, setX] = useState(120);
-  const [y, setY] = useState(150);
+const Rectangle = ({ changePosition, attrs, key, id }) => {
+  const { position, shape, style } = attrs;
   return (
-    <Rect
-      key={key}
-      x={x}
-      y={y}
-      width={100}
-      height={100}
-      stroke={"black"}
-      shadowBlur={10}
+    <Group
+      x={position.x}
+      y={position.y}
       draggable
-      onDragStart={() => setisdraging(true)}
       onDragEnd={(e) => {
-        setisdraging(false);
-        setX(e.target.x());
-        setY(e.target.y());
+        changePosition(id, e.target.x(), e.target.y());
       }}
-    />
+    >
+      <Text text={`Real Time x=${position.x} y=${position.y}`}  y={-10} />
+      <Rect
+        key={key}
+        width={shape.w}
+        height={shape.h}
+        fill={style.fill}
+      />
+    </Group>
   );
 };
 

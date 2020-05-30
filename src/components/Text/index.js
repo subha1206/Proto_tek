@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { Text } from "react-konva";
+import React from "react";
+import { Text, Group } from "react-konva";
 
-const CustText = () => {
-  const [, setisdraging] = useState(false);
-  const [x, setX] = useState(200);
-  const [y, setY] = useState(50);
+const CustText = ({ changePosition, attrs, key, id }) => {
+  const { position, style } = attrs;
   return (
-    <Text
-      text={"You Dropped some random text"}
-      fontSize={24}
-      x={x}
-      y={y}
+    <Group
+      x={position.x}
+      y={position.y}
       draggable
-      onDragStart={() => setisdraging(true)}
       onDragEnd={(e) => {
-        setisdraging(false);
-        setX(e.target.x());
-        setY(e.target.y());
+        changePosition(id, e.target.x(), e.target.y());
       }}
-    />
+    >
+      <Text
+        key={key}
+        text={"You Dropped some random text"}
+        fontSize={style.fontSize}
+        fill={style.fill}
+      />
+    </Group>
   );
 };
 
