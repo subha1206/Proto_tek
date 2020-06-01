@@ -2,7 +2,7 @@ import React from "react";
 
 import { Circle, Group, Text } from "react-konva";
 
-const Circ = ({ changePosition, attrs, key, id }) => {
+const Circ = ({ changePosition, attrs, key, id, }) => {
     
   const { position, shape, style } = attrs;
 
