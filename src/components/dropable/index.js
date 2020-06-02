@@ -15,13 +15,15 @@ const DropZone = ({ accept, meta, setMeta, onDrop }) => {
     let scaleBy = 1.01;
 
     e.evt.preventDefault();
-    var oldScale = e.target.scaleX();
+    const stage = e.target.getStage();
 
-    var pointer = e.target.getPointerPosition();
+    var oldScale = stage.scaleX();
+
+    var pointer = stage.getPointerPosition();
 
     var mousePointTo = {
-      x: (pointer.x - e.target.x()) / oldScale,
-      y: (pointer.y - e.target.y()) / oldScale,
+      x: (pointer.x - stage.x()) / oldScale,
+      y: (pointer.y - stage.y()) / oldScale,
     };
 
     let newScale = e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
@@ -32,9 +34,8 @@ const DropZone = ({ accept, meta, setMeta, onDrop }) => {
       x: pointer.x - mousePointTo.x * newScale,
       y: pointer.y - mousePointTo.y * newScale,
     };
-    e.target.position(newPos);
-    e.target.batchDraw();
-    console.log(pointer);
+    stage.position(newPos);
+    stage.batchDraw();
   };
 
   const changePosition = (id, x, y) => {
@@ -86,9 +87,25 @@ const DropZone = ({ accept, meta, setMeta, onDrop }) => {
     }
   };
 
+  const dragFuntion = (e) => {
+    e.evt.preventDefault();
+
+    let scaleBy = 1.01;
+
+    let x = e.target.x();
+    let scalex = e.target.scaleX();
+    let scaley = e.target.scaleY();
+  };
+
   return (
     <div ref={drop} style={{ height: "500px", border: "1px solid red" }}>
-      <Stage width={700} height={500} onWheel={zoom}>
+      <Stage
+        draggable
+        width={700}
+        height={500}
+        onWheel={zoom}
+        onDragEnd={dragFuntion}
+      >
         <Layer>
           {meta
             ? Object.values(meta).map((shape) => {

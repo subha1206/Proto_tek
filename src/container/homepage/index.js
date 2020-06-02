@@ -7,13 +7,35 @@ import { v4 as uuidv4 } from "uuid";
 
 import { ItemTypes } from "../../constants/types";
 
+import { FaRegCircle, FaRegSquare } from "react-icons/fa";
+
+import { BsTextareaT } from "react-icons/bs";
+
 import "./style.scss";
 
 const Home = () => {
   const shapes = [
-    { name: "Rect", type: ItemTypes.CARD, uinqId: uuidv4(), key: "rect" },
-    { name: "Circle", type: ItemTypes.CARD, uinqId: uuidv4(), key: "circ" },
-    { name: "Text", type: ItemTypes.CARD, uinqId: uuidv4(), key: "text" },
+    {
+      name: "Rect",
+      type: ItemTypes.CARD,
+      uinqId: uuidv4(),
+      key: "rect",
+      icon: <FaRegSquare />,
+    },
+    {
+      name: "Circle",
+      type: ItemTypes.CARD,
+      uinqId: uuidv4(),
+      key: "circ",
+      icon: <FaRegCircle />,
+    },
+    {
+      name: "Text",
+      type: ItemTypes.CARD,
+      uinqId: uuidv4(),
+      key: "text",
+      icon: <BsTextareaT />,
+    },
   ];
 
   const [meta, setMeta] = useState();
@@ -99,28 +121,32 @@ const Home = () => {
   };
 
   return (
-    <>
-      <div>
-        <h1>Just For MarkUp</h1>
+    <div className="main-container">
+      <div className="test">
+        <ul>
+          <li>
+            {shapes.map(({ name, type, uinqId, key, icon }) => (
+              <Card
+                name={name}
+                type={type}
+                uinqId={uinqId}
+                key={key}
+                icon={icon}
+              />
+            ))}
+          </li>
+        </ul>
       </div>
-      <div className="main-container">
-        <div className="test">
-          <h3>Drag the shapes from Bellow</h3>
-          {shapes.map(({ name, type, uinqId, key }) => (
-            <Card name={name} type={type} uinqId={uinqId} key={key} />
-          ))}
-        </div>
 
-        <div className="text2">
-          <DropZone
-            accept={"CARD"}
-            onDrop={handleDrop}
-            meta={meta}
-            setMeta={setMeta}
-          />
-        </div>
+      <div className="text2">
+        <DropZone
+          accept={"CARD"}
+          onDrop={handleDrop}
+          meta={meta}
+          setMeta={setMeta}
+        />
       </div>
-    </>
+    </div>
   );
 };
 

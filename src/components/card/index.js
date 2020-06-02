@@ -1,26 +1,23 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 
-const Card = ({ name, type } ) => {
+import "./card.scss"
 
-  
+const Card = ({ name, type, icon }) => {
   const [, drag] = useDrag({
     item: { name, type },
-    // end: (item, monitor) => {
-    //   const dropResult = monitor.getDropResult();
-    //   if (item && dropResult) {
-    //     alert(`You dropped ${item.name}`);
-    //   }
-    // },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
 
   return (
-    <h4 style={{ cursor: "pointer" }} ref={drag}  >
-      {name}
-    </h4>
+    <div ref={drag} className="sidebar-card">
+      {icon}
+      <span style={{ cursor: "pointer" }} >
+        {name}
+      </span>
+    </div>
   );
 };
 
