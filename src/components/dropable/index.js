@@ -7,10 +7,21 @@ import { Stage, Layer } from "react-konva";
 import Rectangle from "../Rect";
 import Circ from "../Circle";
 import CustText from "../Text";
+import CustArrow from "../arrow/index";
 
 import { useDrop } from "react-dnd";
 
-const DropZone = ({ accept, meta, setMeta, onDrop, onDrag }) => {
+const DropZone = ({
+  accept,
+  meta,
+  setMeta,
+  onDrop,
+  onDrag,
+  handleArrow,
+  selectShapeID,
+  shapeId
+  
+}) => {
   const zoom = (e) => {
     let scaleBy = 1.01;
 
@@ -64,6 +75,8 @@ const DropZone = ({ accept, meta, setMeta, onDrop, onDrag }) => {
     }),
   });
 
+  console.log("shape meta", meta);
+  
   const getShape = (shape) => {
     switch (shape.type) {
       case "Rect":
@@ -72,22 +85,31 @@ const DropZone = ({ accept, meta, setMeta, onDrop, onDrag }) => {
             key={uuidv4()}
             {...shape}
             changePosition={changePosition}
+            selectShapeID={selectShapeID}
           />
         );
       case "Circle":
         return (
-          <Circ key={uuidv4()} {...shape} changePosition={changePosition} />
+          <Circ
+            key={uuidv4()}
+            {...shape}
+            changePosition={changePosition}
+            selectShapeID={selectShapeID}
+          />
         );
       case "Text":
         return (
-          <CustText key={uuidv4()} {...shape} changePosition={changePosition} />
+          <CustText
+            key={uuidv4()}
+            {...shape}
+            changePosition={changePosition}
+            selectShapeID={selectShapeID}
+          />
         );
       default:
         break;
     }
   };
-
-  
 
   // (stage x position - element x posiition )/stage scale
   return (
@@ -105,6 +127,7 @@ const DropZone = ({ accept, meta, setMeta, onDrop, onDrag }) => {
                 return getShape(shape);
               })
             : null}
+          <CustArrow shapeId={shapeId} handleArrow={handleArrow} meta={meta} />
         </Layer>
       </Stage>
     </div>

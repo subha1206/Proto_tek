@@ -38,9 +38,10 @@ const Home = () => {
     },
   ];
 
+  const [x, setX] = useState(50);
+  const [y, setY] = useState(100);
 
-  const [x, setX] = useState(50)
-  const [y, setY] = useState(100)
+  const [shapeId, selectShapeID] = useState(null);
 
   const [meta, setMeta] = useState();
 
@@ -65,7 +66,7 @@ const Home = () => {
               },
               position: {
                 x: x,
-                y: y
+                y: y,
               },
             },
             path: "Rect",
@@ -89,7 +90,7 @@ const Home = () => {
               },
               position: {
                 x: x,
-                y: y
+                y: y,
               },
             },
             path: "Circle",
@@ -111,7 +112,7 @@ const Home = () => {
               },
               position: {
                 x: x,
-                y: y
+                y: y,
               },
             },
             path: "Text",
@@ -136,10 +137,15 @@ const Home = () => {
     let updatedX = -(x - 50) / scalex;
     let updatedY = -(y - 100) / scaley;
 
-    setX(updatedX)
-    setY(updatedY)
+    setX(updatedX);
+    setY(updatedY);
   };
 
+
+  const handleArrow = (e) => {
+    var p = [50, 100, shapeId.x, shapeId.y];
+    e.target.setPoints(p);
+  };
 
   return (
     <div className="main-container">
@@ -166,6 +172,9 @@ const Home = () => {
           meta={meta}
           setMeta={setMeta}
           onDrag={handleDrag}
+          handleArrow={handleArrow}
+          selectShapeID={selectShapeID}
+          shapeId={shapeId}
         />
       </div>
     </div>
