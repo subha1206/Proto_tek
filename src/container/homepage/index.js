@@ -38,6 +38,10 @@ const Home = () => {
     },
   ];
 
+
+  const [x, setX] = useState(50)
+  const [y, setY] = useState(100)
+
   const [meta, setMeta] = useState();
 
   const handleDrop = (item) => {
@@ -60,8 +64,8 @@ const Home = () => {
                 fill: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
               },
               position: {
-                x: Math.floor(Math.random() * 200 + 1),
-                y: Math.floor(Math.random() * 200 + 1),
+                x: x,
+                y: y
               },
             },
             path: "Rect",
@@ -84,8 +88,8 @@ const Home = () => {
                 fill: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
               },
               position: {
-                x: Math.floor(Math.random() * 200 + 1),
-                y: Math.floor(Math.random() * 200 + 1),
+                x: x,
+                y: y
               },
             },
             path: "Circle",
@@ -106,8 +110,8 @@ const Home = () => {
                 fill: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
               },
               position: {
-                x: Math.floor(Math.random() * 200 + 1),
-                y: Math.floor(Math.random() * 200 + 1),
+                x: x,
+                y: y
               },
             },
             path: "Text",
@@ -119,6 +123,23 @@ const Home = () => {
         break;
     }
   };
+
+  const handleDrag = (e) => {
+    e.evt.preventDefault();
+
+    let x = e.target.x();
+    let y = e.target.y();
+
+    let scalex = e.target.scaleX();
+    let scaley = e.target.scaleY();
+
+    let updatedX = -(x - 50) / scalex;
+    let updatedY = -(y - 100) / scaley;
+
+    setX(updatedX)
+    setY(updatedY)
+  };
+
 
   return (
     <div className="main-container">
@@ -144,6 +165,7 @@ const Home = () => {
           onDrop={handleDrop}
           meta={meta}
           setMeta={setMeta}
+          onDrag={handleDrag}
         />
       </div>
     </div>

@@ -1,17 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import { Rect, Group, Text, Transformer } from "react-konva";
+import { Rect, Group, Text } from "react-konva";
 
 const Rectangle = ({ changePosition, attrs, key, id }) => {
-  // const shapeRef = React.useRef();
-  // const trRef = React.useRef();
-  // React.useEffect(() => {
-  //   if (isSelected) {
-  //     // we need to attach transformer manually
-  //     trRef.current.setNode(shapeRef.current);
-  //     trRef.current.getLayer().batchDraw();
-  //   }
-  // }, [isSelected]);
+  
   const { position, shape, style } = attrs;
   return (
     <Group

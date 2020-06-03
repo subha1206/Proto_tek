@@ -10,7 +10,7 @@ import CustText from "../Text";
 
 import { useDrop } from "react-dnd";
 
-const DropZone = ({ accept, meta, setMeta, onDrop }) => {
+const DropZone = ({ accept, meta, setMeta, onDrop, onDrag }) => {
   const zoom = (e) => {
     let scaleBy = 1.01;
 
@@ -87,16 +87,9 @@ const DropZone = ({ accept, meta, setMeta, onDrop }) => {
     }
   };
 
-  const dragFuntion = (e) => {
-    e.evt.preventDefault();
+  
 
-    let scaleBy = 1.01;
-
-    let x = e.target.x();
-    let scalex = e.target.scaleX();
-    let scaley = e.target.scaleY();
-  };
-
+  // (stage x position - element x posiition )/stage scale
   return (
     <div ref={drop} style={{ height: "500px", border: "1px solid red" }}>
       <Stage
@@ -104,7 +97,7 @@ const DropZone = ({ accept, meta, setMeta, onDrop }) => {
         width={700}
         height={500}
         onWheel={zoom}
-        onDragEnd={dragFuntion}
+        onDragEnd={onDrag}
       >
         <Layer>
           {meta
