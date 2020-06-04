@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import DropZone from "../../components/dropable";
 import Card from "../../components/card";
 
+import Konva from "konva";
+
 import { v4 as uuidv4 } from "uuid";
 
 import { ItemTypes } from "../../constants/types";
@@ -41,7 +43,8 @@ const Home = () => {
   const [x, setX] = useState(50);
   const [y, setY] = useState(100);
 
-  const [shapeId, selectShapeID] = useState(null);
+  const [arrowx2, setArrowX2] = useState(50);
+  const [arrowy2, setArrowY2] = useState(100);
 
   const [meta, setMeta] = useState();
 
@@ -141,10 +144,28 @@ const Home = () => {
     setY(updatedY);
   };
 
+  let tempLayer;
+  const handleArrowMove = (e) => {
+    const stage = e.target.getStage();
+    const layer = stage.getLayers()[0];
+    var pos = stage.getPointerPosition();
+    // var shape = layer.getIntersection(pos);
+    
+    setArrowX2(pos.x)
+    setArrowY2(pos.y)
+  };
+
+  // console.log("state var", x, y);
 
   const handleArrow = (e) => {
-    var p = [50, 100, shapeId.x, shapeId.y];
-    e.target.setPoints(p);
+    const stage = e.target.getStage();
+    const layer = stage.getLayers()[0];
+    if (stage.children.length < 2) {
+      tempLayer = new Konva.Layer();
+      stage.add(tempLayer);
+      e.target.moveTo(tempLayer);
+      layer.draw();
+    }
   };
 
   return (
@@ -173,8 +194,9 @@ const Home = () => {
           setMeta={setMeta}
           onDrag={handleDrag}
           handleArrow={handleArrow}
-          selectShapeID={selectShapeID}
-          shapeId={shapeId}
+          handleArrowMove={handleArrowMove}
+          arrowx2={arrowx2}
+          arrowy2={arrowy2}
         />
       </div>
     </div>

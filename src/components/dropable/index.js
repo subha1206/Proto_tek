@@ -18,9 +18,9 @@ const DropZone = ({
   onDrop,
   onDrag,
   handleArrow,
-  selectShapeID,
-  shapeId
-  
+  handleArrowMove,
+  arrowx2,
+  arrowy2,
 }) => {
   const zoom = (e) => {
     let scaleBy = 1.01;
@@ -75,8 +75,6 @@ const DropZone = ({
     }),
   });
 
-  console.log("shape meta", meta);
-  
   const getShape = (shape) => {
     switch (shape.type) {
       case "Rect":
@@ -85,26 +83,15 @@ const DropZone = ({
             key={uuidv4()}
             {...shape}
             changePosition={changePosition}
-            selectShapeID={selectShapeID}
           />
         );
       case "Circle":
         return (
-          <Circ
-            key={uuidv4()}
-            {...shape}
-            changePosition={changePosition}
-            selectShapeID={selectShapeID}
-          />
+          <Circ key={uuidv4()} {...shape} changePosition={changePosition} />
         );
       case "Text":
         return (
-          <CustText
-            key={uuidv4()}
-            {...shape}
-            changePosition={changePosition}
-            selectShapeID={selectShapeID}
-          />
+          <CustText key={uuidv4()} {...shape} changePosition={changePosition} />
         );
       default:
         break;
@@ -127,7 +114,13 @@ const DropZone = ({
                 return getShape(shape);
               })
             : null}
-          <CustArrow shapeId={shapeId} handleArrow={handleArrow} meta={meta} />
+          <CustArrow
+            x2={arrowx2}
+            y2={arrowy2}
+            handleArrow={handleArrow}
+            meta={meta}
+            handleArrowMove={handleArrowMove}
+          />
         </Layer>
       </Stage>
     </div>
