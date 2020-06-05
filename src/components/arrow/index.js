@@ -2,10 +2,12 @@ import React from "react";
 
 import { Arrow } from "react-konva";
 
-const CustArrow = ({ handleArrow, shapeId, meta, handleArrowMove, x2, y2 }) => {
+const CustArrow = ({ handleArrow, handleArrowMove, pointsArr }) => {
+
+  console.log("dsd", pointsArr)
   return (
     <Arrow
-      points={[0, 100, x2, y2]}
+      points={[0, 100,pointsArr.slice(-1)[0].x, pointsArr.slice(-1)[0].y ]}
       pointerLength={10}
       pointerWidth={10}
       fill={"black"}

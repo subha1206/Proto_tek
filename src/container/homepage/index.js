@@ -43,9 +43,6 @@ const Home = () => {
   const [x, setX] = useState(50);
   const [y, setY] = useState(100);
 
-  const [arrowx2, setArrowX2] = useState(50);
-  const [arrowy2, setArrowY2] = useState(100);
-
   const [meta, setMeta] = useState();
 
   const handleDrop = (item) => {
@@ -144,27 +141,30 @@ const Home = () => {
     setY(updatedY);
   };
 
-  let tempLayer;
+  let pointsArr = [
+    { x: 100, y: 100 },
+    { x: 50, y: 300 },
+  ];
+
   const handleArrowMove = (e) => {
-    const stage = e.target.getStage();
-    const layer = stage.getLayers()[0];
-    var pos = stage.getPointerPosition();
-    // var shape = layer.getIntersection(pos);
-    
-    setArrowX2(pos.x)
-    setArrowY2(pos.y)
+    let stage = e.target.getStage();
+    let baseLayer = stage.getLayers()[0];
+    let pos = stage.getPointerPosition();
+    pointsArr.push(pos);
+    console.log(baseLayer, pos);
   };
 
-  // console.log("state var", x, y);
+ 
 
   const handleArrow = (e) => {
     const stage = e.target.getStage();
     const layer = stage.getLayers()[0];
+
     if (stage.children.length < 2) {
-      tempLayer = new Konva.Layer();
+      let tempLayer = new Konva.Layer();
       stage.add(tempLayer);
       e.target.moveTo(tempLayer);
-      // layer.draw();
+      layer.draw();
     }
   };
 
@@ -195,8 +195,7 @@ const Home = () => {
           onDrag={handleDrag}
           handleArrow={handleArrow}
           handleArrowMove={handleArrowMove}
-          arrowx2={arrowx2}
-          arrowy2={arrowy2}
+          pointsArr={pointsArr}
         />
       </div>
     </div>

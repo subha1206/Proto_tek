@@ -19,8 +19,7 @@ const DropZone = ({
   onDrag,
   handleArrow,
   handleArrowMove,
-  arrowx2,
-  arrowy2,
+  pointsArr,
 }) => {
   const zoom = (e) => {
     let scaleBy = 1.01;
@@ -114,13 +113,18 @@ const DropZone = ({
                 return getShape(shape);
               })
             : null}
-          <CustArrow
-            x2={arrowx2}
-            y2={arrowy2}
-            handleArrow={handleArrow}
-            meta={meta}
-            handleArrowMove={handleArrowMove}
-          />
+          {pointsArr.length > 0
+            ? pointsArr.map(() => {
+                return (
+                  <CustArrow
+                    pointsArr={pointsArr}
+                    handleArrow={handleArrow}
+                    meta={meta}
+                    handleArrowMove={handleArrowMove}
+                  />
+                );
+              })
+            : null}
         </Layer>
       </Stage>
     </div>
