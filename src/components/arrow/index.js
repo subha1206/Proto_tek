@@ -16,7 +16,7 @@ const CustArrow = ({ handleArrow, handleArrowMove, pointsArr }) => {
       draggable
       onDragStart={handleArrow}
       onDragMove={handleArrowMove}
-      onDragEnd={handleArrowMove}
+      // onDragEnd={handleArrowMove}
     />
   );
 };

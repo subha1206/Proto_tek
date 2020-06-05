@@ -151,7 +151,7 @@ const Home = () => {
     let baseLayer = stage.getLayers()[0];
     let pos = stage.getPointerPosition();
     pointsArr.push(pos);
-    console.log(baseLayer, pos);
+    // console.log(baseLayer, pos, pointsArr);
   };
 
  
