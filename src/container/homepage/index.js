@@ -164,7 +164,7 @@ const Home = () => {
       tempLayer = new Konva.Layer();
       stage.add(tempLayer);
       e.target.moveTo(tempLayer);
-      layer.draw();
+      // layer.draw();
     }
   };
 
